@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InternBuddy AI — Pendamping Magang Kamu</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primer:      { DEFAULT: '#2563EB', muda: '#EFF6FF', tua: '#1D4ED8' },
+            aksen:       { DEFAULT: '#F97316', muda: '#FFF7ED' },
+            permukaan:   '#F8FAFC',
+            batas:       '#E2E8F0',
+          },
+          fontFamily: { sans: ['"Inter"', 'system-ui', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-permukaan font-sans text-slate-800 antialiased">
+
+<!-- ══════════════════════════════════════════════════════════════════
+     LAYAR 1 — LOGIN
+══════════════════════════════════════════════════════════════════ -->
+<div id="layar-login" class="layar-auth">
+  <div class="auth-kiri">
+    <div class="auth-brand">
+      <div class="auth-logo-ikon">
+        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <h1 class="auth-nama-brand">InternBuddy <span class="text-aksen">AI</span></h1>
+    </div>
+    <h2 class="auth-judul">Selamat datang kembali! 👋</h2>
+    <p class="auth-sub">Masuk untuk melanjutkan perjalanan magang dan onboarding kamu.</p>
+
+    <form id="formLogin" class="auth-form" novalidate aria-label="Form login">
+      <div class="grup-input">
+        <label class="label-input" for="loginEmail">Alamat Email</label>
+        <input id="loginEmail" type="email" class="kolom-input" placeholder="nama@email.com"
+               autocomplete="email" required aria-required="true" />
+        <p class="pesan-error" id="errLoginEmail" role="alert" aria-live="polite"></p>
+      </div>
+      <div class="grup-input">
+        <label class="label-input" for="loginPassword">Password</label>
+        <div class="relative">
+          <input id="loginPassword" type="password" class="kolom-input pr-11" placeholder="Masukkan password"
+                 autocomplete="current-password" required aria-required="true" />
+          <button type="button" class="tombol-lihat-pw" data-target="loginPassword" aria-label="Tampilkan password">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="pesan-error" id="errLoginPassword" role="alert" aria-live="polite"></p>
+      </div>
+      <p class="pesan-error text-center" id="errLoginUmum" role="alert" aria-live="polite"></p>
+      <button type="submit" class="tombol-utama-auth" id="tombolLoginSubmit">Masuk</button>
+    </form>
+
+    <p class="auth-tautan-bawah">
+      Belum punya akun?
+      <button class="tautan-auth" id="keHalamanRegister">Daftar sekarang</button>
+    </p>
+
+    <!-- Akun demo -->
+    <div class="demo-akun">
+      <p class="demo-judul">🔑 Akun Demo</p>
+      <p class="demo-isi">Email: <strong>demo@internbuddy.id</strong></p>
+      <p class="demo-isi">Password: <strong>demo1234</strong></p>
+    </div>
+  </div>
+  <div class="auth-kanan" aria-hidden="true">
+    <div class="auth-ilustrasi">
+      <div class="ilustrasi-kartu ilustrasi-1">
+        <span class="text-2xl">🎯</span>
+        <div>
+          <p class="text-xs font-semibold text-slate-900">Target Minggu Ini</p>
+          <p class="text-xs text-slate-500">3 dari 5 tugas selesai</p>
+        </div>
+      </div>
+      <div class="ilustrasi-kartu ilustrasi-2">
+        <span class="text-2xl">💬</span>
+        <div>
+          <p class="text-xs font-semibold text-slate-900">Asisten AI Siap</p>
+          <p class="text-xs text-slate-500">Tanyakan apa saja</p>
+        </div>
+      </div>
+      <div class="ilustrasi-kartu ilustrasi-3">
+        <span class="text-2xl">📈</span>
+        <div>
+          <p class="text-xs font-semibold text-slate-900">Progres Onboarding</p>
+          <p class="text-xs text-slate-500">Kamu berkembang pesat!</p>
+        </div>
+      </div>
+      <p class="ilustrasi-tagline">"Setiap hari magang adalah kesempatan belajar baru."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     LAYAR 2 — REGISTRASI
+══════════════════════════════════════════════════════════════════ -->
+<div id="layar-register" class="layar-auth hidden">
+  <div class="auth-kiri" style="max-width:480px">
+    <div class="auth-brand">
+      <div class="auth-logo-ikon">
+        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <h1 class="auth-nama-brand">InternBuddy <span class="text-aksen">AI</span></h1>
+    </div>
+    <h2 class="auth-judul">Buat akun barumu 🚀</h2>
+    <p class="auth-sub">Bergabunglah dan mulai perjalanan magang yang lebih terstruktur.</p>
+
+    <form id="formRegister" class="auth-form" novalidate aria-label="Form registrasi">
+      <div class="grup-input">
+        <label class="label-input" for="regNama">Nama Lengkap</label>
+        <input id="regNama" type="text" class="kolom-input" placeholder="Nama Lengkap Kamu"
+               autocomplete="name" required aria-required="true" />
+        <p class="pesan-error" id="errRegNama" role="alert" aria-live="polite"></p>
+      </div>
+      <div class="grup-input">
+        <label class="label-input" for="regEmail">Alamat Email</label>
+        <input id="regEmail" type="email" class="kolom-input" placeholder="nama@email.com"
+               autocomplete="email" required aria-required="true" />
+        <p class="pesan-error" id="errRegEmail" role="alert" aria-live="polite"></p>
+      </div>
+      <div class="grup-input">
+        <label class="label-input" for="regPassword">Password</label>
+        <div class="relative">
+          <input id="regPassword" type="password" class="kolom-input pr-11" placeholder="Minimal 8 karakter"
+                 autocomplete="new-password" required aria-required="true" aria-describedby="infoPassword" />
+          <button type="button" class="tombol-lihat-pw" data-target="regPassword" aria-label="Tampilkan password">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </div>
+        <p id="infoPassword" class="text-xs text-slate-400 mt-1">Gunakan minimal 8 karakter, kombinasikan huruf dan angka.</p>
+        <p class="pesan-error" id="errRegPassword" role="alert" aria-live="polite"></p>
+      </div>
+      <div class="grup-input">
+        <label class="label-input" for="regKonfirmPassword">Konfirmasi Password</label>
+        <div class="relative">
+          <input id="regKonfirmPassword" type="password" class="kolom-input pr-11" placeholder="Ulangi password"
+                 autocomplete="new-password" required aria-required="true" />
+          <button type="button" class="tombol-lihat-pw" data-target="regKonfirmPassword" aria-label="Tampilkan konfirmasi password">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="pesan-error" id="errRegKonfirm" role="alert" aria-live="polite"></p>
+      </div>
+      <p class="pesan-error text-center" id="errRegUmum" role="alert" aria-live="polite"></p>
+      <button type="submit" class="tombol-utama-auth">Buat Akun</button>
+    </form>
+
+    <p class="auth-tautan-bawah">
+      Sudah punya akun?
+      <button class="tautan-auth" id="keHalamanLogin">Masuk di sini</button>
+    </p>
+  </div>
+  <div class="auth-kanan" aria-hidden="true">
+    <div class="auth-ilustrasi">
+      <div class="ilustrasi-kartu ilustrasi-1">
+        <span class="text-2xl">✅</span>
+        <div>
+          <p class="text-xs font-semibold text-slate-900">Checklist Onboarding</p>
+          <p class="text-xs text-slate-500">Semua tersusun rapi</p>
+        </div>
+      </div>
+      <div class="ilustrasi-kartu ilustrasi-2">
+        <span class="text-2xl">📝</span>
+        <div>
+          <p class="text-xs font-semibold text-slate-900">Refleksi Harian</p>
+          <p class="text-xs text-slate-500">Catat pertumbuhanmu</p>
+        </div>
+      </div>
+      <div class="ilustrasi-kartu ilustrasi-3">
+        <span class="text-2xl">🤝</span>
+        <div>
+          <p class="text-xs font-semibold text-slate-900">Panduan Lengkap</p>
+          <p class="text-xs text-slate-500">6 topik penting magang</p>
+        </div>
+      </div>
+      <p class="ilustrasi-tagline">"Persiapan yang baik adalah setengah dari keberhasilan."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     LAYAR 3 — ONBOARDING PROFIL
+══════════════════════════════════════════════════════════════════ -->
+<div id="layar-profil" class="hidden min-h-screen bg-permukaan flex items-center justify-center p-5">
+  <div class="w-full max-w-2xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-primer flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+        </div>
+        <span class="text-xl font-bold text-slate-900">InternBuddy <span class="text-primer">AI</span></span>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-900 mb-2">Lengkapi Profil Magang Kamu 🎓</h2>
+      <p class="text-slate-500 text-sm">Informasi ini membantu kami mempersonalisasi pengalaman onboarding kamu.</p>
+    </div>
+
+    <!-- Step indicator -->
+    <div class="flex items-center justify-center gap-2 mb-8" aria-label="Langkah 1 dari 1">
+      <div class="w-8 h-1.5 rounded-full bg-primer"></div>
+      <div class="w-8 h-1.5 rounded-full bg-slate-200"></div>
+      <div class="w-8 h-1.5 rounded-full bg-slate-200"></div>
+    </div>
+
+    <div class="kartu">
+      <form id="formProfil" novalidate aria-label="Form profil magang">
+
+        <!-- Avatar upload -->
+        <div class="flex flex-col items-center mb-6">
+          <div class="relative">
+            <div id="pratinjauAvatar" class="avatar-pratinjau" aria-label="Foto profil">
+              <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <label for="inputFoto" class="tombol-upload-foto" aria-label="Unggah foto profil">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </label>
+            <input id="inputFoto" type="file" accept="image/*" class="hidden" aria-label="Unggah foto profil" />
+          </div>
+          <p class="text-xs text-slate-400 mt-2">Foto profil (opsional) — maks. 2MB</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <!-- Nama lengkap (readonly - dari registrasi) -->
+          <div class="grup-input">
+            <label class="label-input" for="profilNama">Nama Lengkap</label>
+            <input id="profilNama" type="text" class="kolom-input bg-slate-50" readonly
+                   aria-readonly="true" />
+          </div>
+          <!-- Posisi/bidang -->
+          <div class="grup-input">
+            <label class="label-input" for="profilPosisi">Posisi / Bidang Kerja <span class="text-red-500">*</span></label>
+            <input id="profilPosisi" type="text" class="kolom-input" placeholder="Contoh: Software Developer Intern"
+                   required aria-required="true" />
+            <p class="pesan-error" id="errProfilPosisi" role="alert" aria-live="polite"></p>
+          </div>
+          <!-- Perusahaan -->
+          <div class="grup-input">
+            <label class="label-input" for="profilPerusahaan">Nama Perusahaan / Instansi <span class="text-red-500">*</span></label>
+            <input id="profilPerusahaan" type="text" class="kolom-input" placeholder="Contoh: PT Teknologi Indonesia"
+                   required aria-required="true" />
+            <p class="pesan-error" id="errProfilPerusahaan" role="alert" aria-live="polite"></p>
+          </div>
+          <!-- Tanggal mulai -->
+          <div class="grup-input">
+            <label class="label-input" for="profilMulai">Tanggal Mulai Magang <span class="text-red-500">*</span></label>
+            <input id="profilMulai" type="date" class="kolom-input" required aria-required="true" />
+            <p class="pesan-error" id="errProfilMulai" role="alert" aria-live="polite"></p>
+          </div>
+          <!-- Durasi (opsional) -->
+          <div class="grup-input">
+            <label class="label-input" for="profilDurasi">Durasi Magang <span class="text-xs text-slate-400">(opsional)</span></label>
+            <select id="profilDurasi" class="kolom-input">
+              <option value="">Pilih durasi…</option>
+              <option value="1 bulan">1 Bulan</option>
+              <option value="2 bulan">2 Bulan</option>
+              <option value="3 bulan">3 Bulan (1 Semester)</option>
+              <option value="4 bulan">4 Bulan</option>
+              <option value="6 bulan">6 Bulan</option>
+              <option value="> 6 bulan">Lebih dari 6 Bulan</option>
+            </select>
+          </div>
+          <!-- Pengalaman magang (opsional) -->
+          <div class="grup-input">
+            <label class="label-input" for="profilPengalaman">Pengalaman Magang <span class="text-xs text-slate-400">(opsional)</span></label>
+            <select id="profilPengalaman" class="kolom-input">
+              <option value="Pertama kali">Ini pertama kalinya saya magang</option>
+              <option value="Pernah 1x">Pernah magang 1 kali sebelumnya</option>
+              <option value="Pernah 2x+">Sudah pernah magang lebih dari 2 kali</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="tombol-utama-auth mt-6">
+          Mulai Petualangan Magang Saya 🚀
+        </button>
+      </form>
+    </div>
+    <p class="text-center text-xs text-slate-400 mt-4">
+      ⚠️ Ini adalah prototype. Data disimpan secara lokal di browser dan tidak dikirim ke server manapun.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     LAYAR 4 — APLIKASI UTAMA (Dashboard + 6 Fitur)
+══════════════════════════════════════════════════════════════════ -->
+<div id="layar-app" class="hidden flex h-screen overflow-hidden">
+
+  <!-- ── SIDEBAR ────────────────────────────────────────────────── -->
+  <aside id="sidebar" class="sidebar fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-batas flex flex-col transition-transform duration-300">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-3 px-6 py-4 border-b border-batas">
+      <div class="w-8 h-8 rounded-xl bg-primer flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+        </svg>
+      </div>
+      <span class="text-base font-bold text-slate-900">InternBuddy <span class="text-primer">AI</span></span>
+    </div>
+
+    <!-- Profil pengguna -->
+    <div class="mx-4 mt-4 p-3 rounded-xl bg-primer-muda flex items-center gap-3">
+      <div id="avatarSidebar" class="avatar-sidebar flex-shrink-0"></div>
+      <div class="min-w-0 flex-1">
+        <p id="namaSidebar" class="text-sm font-semibold text-slate-900 truncate">—</p>
+        <p id="posisiSidebar" class="text-xs text-slate-500 truncate">—</p>
+      </div>
+      <button id="tombolEditProfilSidebar" class="flex-shrink-0 p-1.5 rounded-lg hover:bg-primer/10 text-primer transition-colors" aria-label="Edit profil" title="Edit profil">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navigasi -->
+    <nav class="flex-1 px-3 mt-4 space-y-0.5 overflow-y-auto" aria-label="Navigasi utama">
+      <a href="#" class="tautan-nav aktif" data-bagian="dashboard" aria-current="page">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Dashboard
+      </a>
+      <a href="#" class="tautan-nav" data-bagian="checklist">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+        </svg>
+        Checklist Onboarding
+      </a>
+      <a href="#" class="tautan-nav" data-bagian="panduan">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        Panduan Magang
+      </a>
+      <a href="#" class="tautan-nav" data-bagian="asisten">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+        </svg>
+        Asisten AI
+      </a>
+      <a href="#" class="tautan-nav" data-bagian="refleksi">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+        Refleksi Harian
+      </a>
+      <a href="#" class="tautan-nav" data-bagian="progres">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        Pelacakan Progres
+      </a>
+    </nav>
+
+    <!-- Info minggu magang -->
+    <div class="mx-4 mb-2 p-3 rounded-xl bg-aksen-muda border border-orange-100">
+      <p class="text-xs font-semibold text-aksen mb-0.5">📅 Magang Berlangsung</p>
+      <p id="infoMingguMagang" class="text-sm font-bold text-slate-900">Memuat…</p>
+    </div>
+
+    <!-- Tombol logout -->
+    <div class="px-3 pb-4">
+      <button id="tombolLogout" class="tautan-nav w-full text-red-500 hover:bg-red-50 hover:text-red-600">
+        <svg class="ikon-nav" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+        Keluar
+      </button>
+    </div>
+  </aside>
+
+  <!-- ── KONTEN UTAMA ───────────────────────────────────────────── -->
+  <div class="flex-1 flex flex-col ml-0 md:ml-64 min-h-screen overflow-y-auto">
+
+    <!-- Topbar -->
+    <header class="sticky top-0 z-30 bg-white border-b border-batas px-5 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <button id="tombolSidebar" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Buka menu navigasi">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <h1 id="judulHalaman" class="text-sm font-semibold text-slate-900">Dashboard</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+          <span id="labelRoleTopbar">Magang Aktif</span>
+        </span>
+        <div id="avatarTopbar" class="w-8 h-8 rounded-full bg-primer text-white flex items-center justify-center text-xs font-semibold cursor-pointer" title="Profil saya"></div>
+      </div>
+    </header>
+
+    <!-- Konten halaman (6 bagian) -->
+    <main class="flex-1 p-5 md:p-6">
+
+      <!-- ── DASHBOARD ─────────────────────────────────────────── -->
+      <section id="bagian-dashboard" class="bagian-halaman">
+        <div class="mb-6">
+          <h2 id="sapaanDashboard" class="text-2xl font-bold text-slate-900">Selamat datang! 👋</h2>
+          <p id="subDashboard" class="text-slate-500 mt-1 text-sm"></p>
+        </div>
+        <!-- Info internship -->
+        <div id="kartuInfoInternship" class="kartu mb-5 flex items-center gap-4 bg-gradient-to-r from-primer to-blue-500 text-white border-0">
+          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0">🏢</div>
+          <div class="min-w-0">
+            <p id="namaPerusahaanDash" class="font-bold text-white text-base truncate">—</p>
+            <p id="posisiDash" class="text-blue-100 text-sm">—</p>
+          </div>
+          <div class="ml-auto text-right flex-shrink-0">
+            <p id="hariKeMagangDash" class="text-2xl font-bold text-white">—</p>
+            <p class="text-blue-100 text-xs">hari berjalan</p>
+          </div>
+        </div>
+        <!-- Kartu statistik -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+          <div class="kartu-stat border-primer">
+            <p class="label-stat">Tugas Selesai</p>
+            <p class="nilai-stat text-primer" id="dashTugasSelesai">0<span class="sub-stat">/14</span></p>
+          </div>
+          <div class="kartu-stat border-aksen">
+            <p class="label-stat">Refleksi Dicatat</p>
+            <p class="nilai-stat text-aksen" id="dashJumlahRefleksi">0</p>
+          </div>
+          <div class="kartu-stat border-green-400">
+            <p class="label-stat">Panduan Dibaca</p>
+            <p class="nilai-stat text-green-600" id="dashPanduanDibaca">0<span class="sub-stat">/6</span></p>
+          </div>
+          <div class="kartu-stat border-purple-400">
+            <p class="label-stat">Progres</p>
+            <p class="nilai-stat text-purple-600" id="dashPersenProgres">0<span class="sub-stat">%</span></p>
+          </div>
+        </div>
+        <!-- Bar progres -->
+        <div class="kartu mb-5">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-semibold text-slate-900 text-sm">Progres Onboarding</h3>
+            <span id="dashLabelProgres" class="text-sm font-bold text-primer">0%</span>
+          </div>
+          <div class="h-2.5 rounded-full bg-slate-100 overflow-hidden">
+            <div id="dashBarProgres" class="h-full rounded-full bg-gradient-to-r from-primer to-blue-400 transition-all duration-700" style="width:0%"></div>
+          </div>
+          <p id="dashKetProgres" class="text-xs text-slate-400 mt-1.5">—</p>
+        </div>
+        <!-- Aktivitas + Tips -->
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="kartu">
+            <h3 class="font-semibold text-slate-900 mb-3 text-sm">Aktivitas Terbaru</h3>
+            <ul id="listAktivitas" class="space-y-3"></ul>
+          </div>
+          <div class="kartu">
+            <h3 class="font-semibold text-slate-900 mb-3 text-sm">💡 Tips Hari Ini</h3>
+            <ul id="listTipsHarian" class="space-y-2.5"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CHECKLIST ──────────────────────────────────────────── -->
+      <section id="bagian-checklist" class="bagian-halaman hidden">
+        <div class="mb-5 flex items-start sm:items-center justify-between flex-col sm:flex-row gap-3">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Checklist Onboarding</h2>
+            <p class="text-slate-500 text-sm mt-0.5">Tandai setiap tugas saat sudah diselesaikan</p>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <button class="tombol-filter aktif" data-filter="semua">Semua</button>
+            <button class="tombol-filter" data-filter="belum">Belum Selesai</button>
+            <button class="tombol-filter" data-filter="selesai">Sudah Selesai</button>
+          </div>
+        </div>
+        <div class="kartu">
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-batas">
+            <span class="text-sm text-slate-500">Progres: <span id="hitungChecklist" class="font-semibold text-slate-800">0/14</span></span>
+            <div class="w-36 h-2 rounded-full bg-slate-100 overflow-hidden">
+              <div id="barChecklist" class="h-full rounded-full bg-primer transition-all duration-500" style="width:0%"></div>
+            </div>
+          </div>
+          <ul id="itemChecklist" class="space-y-2" aria-label="Daftar tugas onboarding"></ul>
+        </div>
+      </section>
+
+      <!-- ── PANDUAN ────────────────────────────────────────────── -->
+      <section id="bagian-panduan" class="bagian-halaman hidden">
+        <div class="mb-5">
+          <h2 class="text-xl font-bold text-slate-900">Panduan Magang</h2>
+          <p class="text-slate-500 text-sm mt-0.5">Pelajari cara beradaptasi dan berkembang selama magang</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4" id="kartupanduan"></div>
+      </section>
+
+      <!-- ── ASISTEN AI ─────────────────────────────────────────── -->
+      <section id="bagian-asisten" class="bagian-halaman hidden">
+        <div class="mb-4">
+          <h2 class="text-xl font-bold text-slate-900">Asisten AI</h2>
+          <p class="text-slate-500 text-sm mt-0.5">Tanyakan apa saja seputar perjalanan magang kamu</p>
+        </div>
+        <div class="kartu flex flex-col" style="height:calc(100vh - 210px);min-height:440px;">
+          <div id="pesanChat" class="flex-1 overflow-y-auto space-y-3 pr-1 mb-3" aria-live="polite" aria-label="Percakapan"></div>
+          <!-- Saran lanjutan muncul di bawah setiap respons bot -->
+          <div id="saranLanjutan" class="area-saran-lanjutan hidden"></div>
+          <div id="pertanyaanCepat" class="flex flex-wrap gap-2 mb-3">
+            <button class="tombol-cepat" data-pesan="Bagaimana cara meminta feedback ke supervisor?">Minta feedback</button>
+            <button class="tombol-cepat" data-pesan="Apa yang harus aku lakukan di hari pertama magang?">Tips hari pertama</button>
+            <button class="tombol-cepat" data-pesan="Bagaimana cara menulis email yang profesional?">Etika email</button>
+            <button class="tombol-cepat" data-pesan="Aku merasa kewalahan. Apa yang harus aku lakukan?">Merasa kewalahan</button>
+            <button class="tombol-cepat" data-pesan="Bantu saya buat email ke mentor.">Buat email mentor</button>
+          </div>
+          <form id="formChat" class="flex gap-2">
+            <input id="inputChat" type="text" placeholder="Ketik pertanyaanmu di sini…"
+                   class="flex-1 px-4 py-2.5 rounded-xl border border-batas bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-primer focus:border-transparent"
+                   autocomplete="off" aria-label="Kolom pesan" />
+            <button type="submit"
+                    class="px-4 py-2.5 rounded-xl bg-primer text-white text-sm font-medium hover:bg-primer-tua transition-colors flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+              </svg>
+              Kirim
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ── REFLEKSI ───────────────────────────────────────────── -->
+      <section id="bagian-refleksi" class="bagian-halaman hidden">
+        <div class="mb-5">
+          <h2 class="text-xl font-bold text-slate-900">Refleksi Harian</h2>
+          <p class="text-slate-500 text-sm mt-0.5">Catat pengalaman, pembelajaran, dan kendala setiap hari</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="kartu">
+            <h3 class="font-semibold text-slate-900 mb-4 text-sm">✍️ Refleksi Hari Ini</h3>
+            <form id="formRefleksi" class="space-y-3" novalidate>
+              <div>
+                <label class="label-form" for="rf-belajar">Apa yang kamu pelajari hari ini? <span class="text-red-400">*</span></label>
+                <textarea id="rf-belajar" rows="3" class="input-form" placeholder="Contoh: Aku belajar cara kerja Git branching…" required></textarea>
+              </div>
+              <div>
+                <label class="label-form" for="rf-baik">Apa yang berjalan dengan baik?</label>
+                <textarea id="rf-baik" rows="2" class="input-form" placeholder="Contoh: Berhasil menyelesaikan merge conflict sendiri…"></textarea>
+              </div>
+              <div>
+                <label class="label-form" for="rf-kendala">Apa kendalamu hari ini?</label>
+                <textarea id="rf-kendala" rows="2" class="input-form" placeholder="Contoh: Masih bingung dengan struktur folder proyek…"></textarea>
+              </div>
+              <div>
+                <label class="label-form" for="rf-target">Rencana perbaikan untuk besok</label>
+                <input id="rf-target" type="text" class="input-form" placeholder="Contoh: Selesaikan integrasi API" />
+              </div>
+              <div class="flex items-center gap-3 flex-wrap">
+                <label class="label-form mb-0 text-xs">Suasana hati:</label>
+                <div class="flex gap-1.5" id="pemilihMood" role="group" aria-label="Pilih suasana hati">
+                  <button type="button" class="tombol-mood" data-mood="🤩" aria-label="Sangat semangat">🤩</button>
+                  <button type="button" class="tombol-mood" data-mood="😊" aria-label="Senang">😊</button>
+                  <button type="button" class="tombol-mood" data-mood="😐" aria-label="Biasa saja">😐</button>
+                  <button type="button" class="tombol-mood" data-mood="😰" aria-label="Cemas">😰</button>
+                  <button type="button" class="tombol-mood" data-mood="😴" aria-label="Lelah">😴</button>
+                </div>
+              </div>
+              <button type="submit" class="w-full py-2.5 rounded-xl bg-primer text-white font-medium text-sm hover:bg-primer-tua transition-colors">
+                Simpan Refleksi
+              </button>
+            </form>
+          </div>
+          <div class="kartu">
+            <h3 class="font-semibold text-slate-900 mb-4 text-sm">📖 Riwayat Refleksi</h3>
+            <div id="daftarRefleksi" class="space-y-3 overflow-y-auto" style="max-height:480px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── PROGRES ────────────────────────────────────────────── -->
+      <section id="bagian-progres" class="bagian-halaman hidden">
+        <div class="mb-5">
+          <h2 class="text-xl font-bold text-slate-900">Pelacakan Progres</h2>
+          <p class="text-slate-500 text-sm mt-0.5">Visualisasi perkembangan onboarding kamu</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 mb-5">
+          <div class="kartu text-center">
+            <div class="lingkaran-bungkus mx-auto mb-2">
+              <svg viewBox="0 0 36 36" class="lingkaran-svg">
+                <circle class="lingkaran-bg" cx="18" cy="18" r="15.9"/>
+                <circle id="lingkaranChecklist" class="lingkaran-isi text-primer" cx="18" cy="18" r="15.9" style="stroke-dasharray:0 100"/>
+              </svg>
+              <span id="labelLingkaranChecklist" class="label-lingkaran text-primer">0%</span>
+            </div>
+            <p class="text-sm font-semibold text-slate-900">Checklist Selesai</p>
+          </div>
+          <div class="kartu text-center">
+            <div class="lingkaran-bungkus mx-auto mb-2">
+              <svg viewBox="0 0 36 36" class="lingkaran-svg">
+                <circle class="lingkaran-bg" cx="18" cy="18" r="15.9"/>
+                <circle id="lingkaranPanduan" class="lingkaran-isi text-aksen" cx="18" cy="18" r="15.9" style="stroke-dasharray:0 100"/>
+              </svg>
+              <span id="labelLingkaranPanduan" class="label-lingkaran text-aksen">0%</span>
+            </div>
+            <p class="text-sm font-semibold text-slate-900">Panduan Dibaca</p>
+          </div>
+          <div class="kartu text-center">
+            <div class="lingkaran-bungkus mx-auto mb-2">
+              <svg viewBox="0 0 36 36" class="lingkaran-svg">
+                <circle class="lingkaran-bg" cx="18" cy="18" r="15.9"/>
+                <circle id="lingkaranRefleksi" class="lingkaran-isi text-purple-500" cx="18" cy="18" r="15.9" style="stroke-dasharray:0 100"/>
+              </svg>
+              <span id="labelLingkaranRefleksi" class="label-lingkaran text-purple-500">0</span>
+            </div>
+            <p class="text-sm font-semibold text-slate-900">Total Refleksi</p>
+          </div>
+        </div>
+        <div class="kartu mb-4">
+          <h3 class="font-semibold text-slate-900 mb-4 text-sm">Aktivitas Mingguan</h3>
+          <div class="flex items-end gap-3 h-32" id="grafikMingguan" aria-label="Grafik aktivitas mingguan"></div>
+        </div>
+        <div class="kartu">
+          <h3 class="font-semibold text-slate-900 mb-4 text-sm">Progres per Kategori</h3>
+          <div class="space-y-4" id="progresKategori"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Overlay mobile sidebar -->
+  <div id="overlayMobile" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden" aria-hidden="true"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     MODAL PANDUAN
+══════════════════════════════════════════════════════════════════ -->
+<div id="modalPanduan" class="overlay-modal" role="dialog" aria-modal="true" aria-labelledby="judulModal">
+  <div class="kotak-modal">
+    <div class="flex items-center justify-between mb-4">
+      <div id="headerModal" class="flex items-center gap-3"></div>
+      <button id="tutupModal" class="p-2 rounded-lg hover:bg-slate-100 text-slate-500" aria-label="Tutup panduan">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div id="isiModal"></div>
+  </div>
+</div>
+
+<!-- Modal konfirmasi logout -->
+<div id="modalLogout" class="overlay-modal" role="dialog" aria-modal="true" aria-labelledby="judulModalLogout">
+  <div class="kotak-modal" style="max-width:400px">
+    <div class="text-center py-2">
+      <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
+        <svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+        </svg>
+      </div>
+      <h3 id="judulModalLogout" class="text-lg font-bold text-slate-900 mb-2">Yakin ingin keluar?</h3>
+      <p class="text-sm text-slate-500 mb-6">Semua data kamu sudah tersimpan. Kamu bisa masuk kembali kapan saja.</p>
+      <div class="flex gap-3">
+        <button id="batalLogout" class="flex-1 py-2.5 rounded-xl border border-batas text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors">Batal</button>
+        <button id="konfirmasiLogout" class="flex-1 py-2.5 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors">Ya, Keluar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     MODAL EDIT PROFIL
+══════════════════════════════════════════════════════════════════ -->
+<div id="modalEditProfil" class="overlay-modal" role="dialog" aria-modal="true" aria-labelledby="judulModalEditProfil">
+  <div class="kotak-modal" style="max-width:580px">
+
+    <!-- Header modal -->
+    <div class="flex items-center justify-between mb-5">
+      <h2 id="judulModalEditProfil" class="text-lg font-bold text-slate-900">Edit Profil Magang</h2>
+      <button id="tutupEditProfil" class="p-2 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors" aria-label="Tutup form edit profil">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <form id="formEditProfil" novalidate aria-label="Form edit profil magang">
+
+      <!-- Foto profil -->
+      <div class="flex flex-col items-center mb-5">
+        <div class="relative">
+          <div id="editPratinjauAvatar" class="avatar-pratinjau" aria-label="Foto profil saat ini">
+            <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <label for="editInputFoto" class="tombol-upload-foto" aria-label="Ganti foto profil">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </label>
+          <input id="editInputFoto" type="file" accept="image/*" class="hidden" aria-label="Ganti foto profil" />
+        </div>
+        <p class="text-xs text-slate-400 mt-2">Klik ikon kamera untuk mengganti foto (maks. 2MB)</p>
+      </div>
+
+      <!-- Fields dalam grid 2 kolom -->
+      <div class="grid md:grid-cols-2 gap-4">
+
+        <div class="grup-input">
+          <label class="label-input" for="editNama">Nama Lengkap <span class="text-red-500">*</span></label>
+          <input id="editNama" type="text" class="kolom-input" placeholder="Nama Lengkap Kamu"
+                 autocomplete="name" required aria-required="true" />
+          <p class="pesan-error" id="errEditNama" role="alert" aria-live="polite"></p>
+        </div>
+
+        <div class="grup-input">
+          <label class="label-input" for="editPosisi">Posisi / Bidang Kerja <span class="text-red-500">*</span></label>
+          <input id="editPosisi" type="text" class="kolom-input" placeholder="Contoh: Software Developer Intern"
+                 required aria-required="true" />
+          <p class="pesan-error" id="errEditPosisi" role="alert" aria-live="polite"></p>
+        </div>
+
+        <div class="grup-input">
+          <label class="label-input" for="editPerusahaan">Nama Perusahaan / Instansi <span class="text-red-500">*</span></label>
+          <input id="editPerusahaan" type="text" class="kolom-input" placeholder="Contoh: PT Teknologi Indonesia"
+                 required aria-required="true" />
+          <p class="pesan-error" id="errEditPerusahaan" role="alert" aria-live="polite"></p>
+        </div>
+
+        <div class="grup-input">
+          <label class="label-input" for="editMulai">Tanggal Mulai Magang <span class="text-red-500">*</span></label>
+          <input id="editMulai" type="date" class="kolom-input" required aria-required="true" />
+          <p class="pesan-error" id="errEditMulai" role="alert" aria-live="polite"></p>
+        </div>
+
+        <div class="grup-input">
+          <label class="label-input" for="editDurasi">Durasi Magang <span class="text-xs text-slate-400">(opsional)</span></label>
+          <select id="editDurasi" class="kolom-input">
+            <option value="">Pilih durasi…</option>
+            <option value="1 bulan">1 Bulan</option>
+            <option value="2 bulan">2 Bulan</option>
+            <option value="3 bulan">3 Bulan (1 Semester)</option>
+            <option value="4 bulan">4 Bulan</option>
+            <option value="6 bulan">6 Bulan</option>
+            <option value="> 6 bulan">Lebih dari 6 Bulan</option>
+          </select>
+        </div>
+
+        <div class="grup-input">
+          <label class="label-input" for="editPengalaman">Pengalaman Magang <span class="text-xs text-slate-400">(opsional)</span></label>
+          <select id="editPengalaman" class="kolom-input">
+            <option value="Pertama kali">Ini pertama kalinya saya magang</option>
+            <option value="Pernah 1x">Pernah magang 1 kali sebelumnya</option>
+            <option value="Pernah 2x+">Sudah pernah magang lebih dari 2 kali</option>
+          </select>
+        </div>
+
+      </div><!-- /grid -->
+
+      <!-- Tombol aksi -->
+      <div class="flex gap-3 mt-6">
+        <button type="button" id="batalEditProfil"
+                class="flex-1 py-2.5 rounded-xl border border-batas text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors">
+          Batal
+        </button>
+        <button type="submit"
+                class="flex-1 py-2.5 rounded-xl bg-primer text-white text-sm font-medium hover:bg-primer-tua transition-colors">
+          Simpan Perubahan
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
