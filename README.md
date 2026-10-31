@@ -25,10 +25,6 @@ Asisten pada InternBuddy AI menggunakan pendekatan *rule-based*, *keyword matchi
 - JavaScript
 - LocalStorage
 
-### Akun Demo
-Email: `demo@internbuddy.id`
-Password: `demo1234`
-
 ## Versi Proyek
 **InternBuddy AI v3.3**
 Capstone Project — IBM SkillsBuild
